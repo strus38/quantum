@@ -1,0 +1,26 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE:-docker.io/centos/python-38-centos7:latest}
+
+USER root
+RUN rm -rf /data
+
+# install JARVICE Desktop
+RUN curl -k -H 'Cache-Control: no-cache' \
+        https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
+        | bash -s -- --setup-nimbix-desktop --image-common-branch master
+
+# Install all we need
+RUN yum install tk curl centos-release-scl -y
+RUN yum install devtoolset-8-gcc devtoolset-8-gcc-c++ -y
+SHELL [ "/usr/bin/scl", "enable", "devtoolset-8" ]
+
+RUN yum install tk python3-pip python3-tkinter -y
+
+RUN pip3 install myqlm qiskit myqlm-interop
+
+COPY NAE/AppDef.json /etc/NAE/AppDef.json
+RUN curl -k --fail -X POST -d @/etc/NAE/AppDef.json https://cloud.nimbix.net/api/jarvice/validate
+
+RUN bash -c 'mkdir -p /etc/NAE && touch /etc/NAE/{screenshot.png,screenshot.txt,license.txt,AppDef.json}'
+COPY qiskit-myqlm-1.py /tmp/qiskit-myqlm-1.py
+RUN chmod 777 /tmp/qiskit-myqlm-1.py

@@ -19,3 +19,11 @@ You can also use the Dockerfile provided
 ```
 $ docker build -t qiskit-myqlm-1:latest -f ./Dockerfile.qiskit-myqlm-1
 ```
+
+You can also use it in JARVICE (not working it, issue with Python/GCC on CentOS7)
+
+```
+podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.gui --format docker
+...tag...
+...push...
+```
