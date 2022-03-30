@@ -10,8 +10,8 @@ from turtle import *
 import math
 
 
-qr = QuantumRegister(5)
-cr = ClassicalRegister(5)
+qr = QuantumRegister(6)
+cr = ClassicalRegister(6)
 
 circuit=QuantumCircuit(qr,cr)
 circuit.h(qr[0])
@@ -19,6 +19,7 @@ circuit.h(qr[1])
 circuit.h(qr[2])
 circuit.h(qr[3])
 circuit.h(qr[4])
+circuit.h(qr[5])
 
 circuit.cx(qr[0],qr[1])
 circuit.measure(qr,cr)

@@ -9,7 +9,13 @@ An image generator based on qiskit and myqlm
 ![qiskit-myqlm-1](images/qiskit-myqlm-1.png?raw=true "qiskit-myqlm-1")
 
 ```
-#Make sure to get qiskit, myqlm, myqlm-interop, tk ...
+# Make sure to get qiskit, myqlm, myqlm-interop, tk ...
 $ python3 ./qiskit-myqlm-1.py
 
+```
+
+You can also use the Dockerfile provided
+
+```
+$ docker build -t qiskit-myqlm-1:latest -f ./Dockerfile.qiskit-myqlm-1
 ```
