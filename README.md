@@ -29,3 +29,5 @@ podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.gui --format docker
 
 # then add it as a custom app
 ```
+
+![qiskit-myqlm-1 with JARVICE](images/jarvice.JPG?raw=true "Jarvice")
