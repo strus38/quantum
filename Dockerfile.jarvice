@@ -7,6 +7,9 @@ ENV no_proxy=registry.smcx.local,auth.smcx.local,*.kube.local,*.atos.local,*.smc
 USER root
 RUN rm -rf /data
 
+ADD image-common-master /tmp/image-common-master
+RUN /tmp/image-common-master/install-nimbix.sh --setup-nimbix-desktop --skip-mpi-pkg
+
 #RUN curl -k -H 'Cache-Control: no-cache' \
 #        https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
 #        | bash -s -- --setup-nimbix-desktop --image-common-branch master
@@ -15,9 +18,9 @@ RUN rm -rf /data
 RUN dnf install epel-release tk curl -y
 RUN dnf --enablerepo=epel group
 #RUN dnf config-manager --set-enabled powertools
-RUN dnf groupinstall "Xfce" "base-x" -y
+#RUN dnf groupinstall "Xfce" "base-x" -y
 
-RUN dnf install xterm python3-pip python3-tkinter -y
+RUN dnf install python3-pip python3-tkinter -y
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install cython cmake scikit-build
 RUN pip3 install myqlm qiskit myqlm-interop
@@ -28,30 +31,3 @@ RUN curl -k --fail -X POST -d @/etc/NAE/AppDef.json https://cloud.nimbix.net/api
 RUN bash -c 'mkdir -p /etc/NAE && touch /etc/NAE/{screenshot.png,screenshot.txt,license.txt,AppDef.json}'
 COPY qiskit-myqlm-1.py /tmp/qiskit-myqlm-1.py
 RUN chmod 777 /tmp/qiskit-myqlm-1.py
-
-RUN useradd -ms /bin/bash nimbix
-
-RUN Configfile="~/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml" && \
-echo "#! /bin/bash\n\
-xdpyinfo | grep -q -i COMPOSITE || {\n\
-  echo 'x11docker/xfce: X extension COMPOSITE is missing.\n\
-Window manager compositing will not work.\n\
-If you run x11docker with option --nxagent,\n\
-you might want to add option --composite.' >&2\n\
-  [ -e $Configfile ] || {\n\
-    mkdir -p $(dirname $Configfile)\n\
-    echo '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
-<channel name=\"xfwm4\" version=\"1.0\">\n\
-\n\
-  <property name=\"general\" type=\"empty\">\n\
-    <property name=\"use_compositing\" type=\"bool\" value=\"false\"/>\n\
-  </property>\n\
-</channel>\n\
-' > $Configfile\n\
-  }\n\
-}\n\
-startxfce4\n\
-" > /usr/local/bin/start && \
-chmod +x /usr/local/bin/start
-
-CMD start

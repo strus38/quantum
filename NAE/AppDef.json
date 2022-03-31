@@ -29,7 +29,7 @@
                     "positional": true,
                     "required": true,
                     "type": "CONST",
-                    "value": "/usr/bin/xterm"
+                    "value": "python3 /tmp/qiskit-myqlm-1.py"
                 },
                 "APIKEY": {
                     "name": "API key",
@@ -53,7 +53,7 @@
                     "variable": true
                 }
             },
-            "path": "/usr/local/bin/xterm"
+            "path": "/usr/local/bin/nimbix_desktop"
         }
     },
     "image": {

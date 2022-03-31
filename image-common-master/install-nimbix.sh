@@ -42,15 +42,15 @@ done
 # Base OS
 function setup_base_os() {
   PKGS="curl zip unzip sudo"
-  
+
   # install EPEL first, successive packages live there
   dnf -y install epel-release
 
   # Packages to support MPI and basic container operation
-  PKGS+=" passwd xz tar file openssh-server openssh-clients python3"
+  PKGS+=" passwd xz wget tar file openssh-server openssh-clients python3 python3-pip glibc-locale-source glibc-langpack-en"
   PKGS+=" which sshpass mailcap initscripts"
   if [[ -z $SKIP_MPI_PKG ]]; then
-    PKGS+=" openmpi openmpi3 perftest"
+    PKGS+=" openmpi openmpi4 perftest"
     PKGS+=" dapl compat-dapl dapl.i686 compat-dapl.i686 infiniband-diags"
     PKGS+=" rdma-core rdma-core.i686 libibverbs libibverbs-utils"
   fi
@@ -65,19 +65,14 @@ function setup_base_os() {
 
 # Nimbix JARVICE emulation
 function setup_jarvice_emulation() {
-  cd /tmp
-  curl https://codeload.github.com/nimbix/image-common/zip/$BRANCH \
-    >/tmp/nimbix.zip
-  unzip nimbix.zip
-  rm -f nimbix.zip
-  /tmp/nimbix/setup-nimbix.sh
+  /tmp/image-common-master/setup-nimbix.sh
 
   # Redundant directory copies, use a soft link, favor the /usr/local/ but
   #  J2 depends on this so allow the full copies for now
   mkdir -p /usr/lib/JARVICE
-  cp -a /tmp/nimbix/tools /usr/lib/JARVICE
+  cp -a /tmp/image-common-master/tools /usr/lib/JARVICE
   mkdir -p /usr/local/JARVICE
-  cp -a /tmp/nimbix/tools /usr/local/JARVICE
+  cp -a /tmp/image-common-master/tools /usr/local/JARVICE
   #    ln -sf /usr/local/JARVICE /usr/lib/JARVICE
   cat <<'EOF' | tee /etc/profile.d/jarvice-tools.sh >/dev/null
 JARVICE_TOOLS="/usr/local/JARVICE/tools"
@@ -88,7 +83,7 @@ EOF
 
   cd /tmp
   mkdir -p /etc/JARVICE
-  cp -a /tmp/nimbix/etc/* /etc/JARVICE
+  cp -a /tmp/image-common-master/etc/* /etc/JARVICE
   chmod 755 /etc/JARVICE
   mkdir -m 0755 /data
   chown nimbix:nimbix /data
@@ -100,18 +95,18 @@ function setup_nimbix_desktop() {
   # Copy in the VNC server installers, both for CentOS, and the XFCE files
   files="install-centos-desktop.sh"
   files+=" install-centos-real.sh help-real.html"
-  
+
   files+=" prep-tiger.sh install-tiger.sh help-tiger.html postinstall-desktop.sh"
   files+=" nimbix_desktop url.txt xfce4-session-logout share skel.config mimeapps.list helpers.rc"
 
   # Pull the files from the install bolus
   for i in $files; do
-    cp -a /tmp/nimbix/nimbix_desktop/"$i" \
+    cp -a /tmp/image-common-master/nimbix_desktop/"$i" \
       /usr/local/lib/nimbix_desktop
   done
 
   # Install RealVNC server on CentOS if requested, setup the desktop files
-  
+
   /usr/local/lib/nimbix_desktop/install-centos-desktop.sh
 
   if [[ -n "$SETUP_REALVNC" ]]; then
@@ -140,7 +135,7 @@ function setup_nimbix_desktop() {
 
 function cleanup() {
   dnf clean all
-  rm -rf /tmp/nimbix
+  rm -rf /tmp/image-common-master
 }
 
 setup_base_os
