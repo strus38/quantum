@@ -6,8 +6,8 @@ RUN apt-get update -y
 
 # Install Tkinter
 RUN apt-get install tk -y
-
-RUN pip3 install myqlm qiskit myqlm-interop
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install cython cmake myqlm qiskit myqlm-interop
 
 COPY qiskit-myqlm-1.py /tmp/qiskit-myqlm-1.py
 # Commands to run application

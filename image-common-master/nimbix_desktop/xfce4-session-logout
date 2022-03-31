@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+# Replacement menu dialog for exiting the desktop
+# SIGTERM for a Jarvice init, halt for a systemd
+
+# python36-gobject is required on CentOS 7 to install PyGObject
+
+import os
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+
+
+# Using both methods to hopefully get the result on any setup
+def on_shutdown(button):
+    print("Exit requested, calling shutdown")
+    os.system('/usr/bin/sudo kill -s TERM 1')
+    os.system('/usr/bin/sudo halt --force')
+
+
+def on_cancel(button):
+    Gtk.main_quit()
+
+
+class ButtonWindow(Gtk.Window):
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Shutdown")
+        self.set_border_width(25)
+
+        hbox = Gtk.Box(spacing=6)
+        self.add(hbox)
+
+        button = Gtk.Button.new_with_label("Shutdown")
+        button.connect("clicked", on_shutdown)
+        hbox.pack_start(button, True, True, 0)
+
+        button = Gtk.Button.new_with_label("Cancel")
+        button.connect("clicked", on_cancel)
+        hbox.pack_start(button, True, True, 0)
+
+
+win = ButtonWindow()
+win.connect("destroy", Gtk.main_quit)
+win.show_all()
+Gtk.main()

@@ -53,7 +53,7 @@
                     "variable": true
                 }
             },
-            "path": "/usr/local/bin/nimbix_desktop"
+            "path": "/usr/local/bin/xterm"
         }
     },
     "image": {
