@@ -23,7 +23,7 @@ $ docker build -t qiskit-myqlm-1:latest -f ./Dockerfile.qiskit-myqlm-1
 You can also use it in JARVICE:
 
 ```
-podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.gui --format docker
+podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.jarvice
 ...tag...
 ...push...
 
