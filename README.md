@@ -2,6 +2,12 @@
 
 This repo contains several examples of Quantum ... just for fun.
 
+References:
+
+* [Jarvice](https://github.com/nimbix)
+* [MyQLM](https://github.com/myqlm)
+* [qiskit](https://qiskit.org/)
+
 ## qiskit-myqlm-1
 
 An image generator based on qiskit and myqlm
