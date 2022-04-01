@@ -1,7 +1,7 @@
 {
-    "name": "qiskit-myqlm",
-    "description": "Simple MyQLM application",
-    "author": "Quantum team",
+    "name": "<MYAPP>",
+    "description": "<MYAPP>",
+    "author": "<AUTHOR>",
     "licensed": false,
     "public": true,
     "classifications": [
@@ -29,7 +29,7 @@
                     "positional": true,
                     "required": true,
                     "type": "CONST",
-                    "value": "python3 /tmp/qiskit-myqlm-1.py"
+                    "value": "python3 /data/mycode"
                 },
                 "APIKEY": {
                     "name": "API key",
