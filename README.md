@@ -24,7 +24,7 @@ $ python3 ./qiskit-myqlm-1.py
 You can also use the Dockerfile provided:
 
 ```
-$ qiskit-myqlm-1
+$ cd qiskit-myqlm-1
 $ docker build -t qiskit-myqlm-1:latest -f ./Dockerfile.qiskit-myqlm-1
 ```
 
