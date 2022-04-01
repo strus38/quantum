@@ -31,3 +31,7 @@ podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.jarvice
 ```
 
 ![qiskit-myqlm-1 with JARVICE](images/jarvice.JPG?raw=true "Jarvice")
+
+## rockylinux-jarvice-desktop
+
+Build a generic base container for a jarvice-desktop app using Rockylinux as a base image.
