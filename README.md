@@ -16,6 +16,7 @@ An image generator based on qiskit and myqlm
 
 ```
 # Make sure to get qiskit, myqlm, myqlm-interop, tk ...
+$ cd qiskit-myqlm-1
 $ python3 ./qiskit-myqlm-1.py
 
 ```
@@ -23,13 +24,15 @@ $ python3 ./qiskit-myqlm-1.py
 You can also use the Dockerfile provided:
 
 ```
+$ qiskit-myqlm-1
 $ docker build -t qiskit-myqlm-1:latest -f ./Dockerfile.qiskit-myqlm-1
 ```
 
 You can also use it in JARVICE:
 
 ```
-podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.jarvice
+$ cd qiskit-myqlm-1
+$ podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.jarvice
 ...tag...
 ...push...
 
@@ -40,4 +43,4 @@ podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.jarvice
 
 ## rockylinux-jarvice-desktop
 
-Build a generic base container for a jarvice-desktop app using Rockylinux as a base image.
+Build a generic base container for a nimbix-desktop app using Rockylinux as a base image.

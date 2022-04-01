@@ -4,16 +4,17 @@
 
 This repo aims to provide a sample base image to a rockylinux jarvice-desltop application.
 
-This image can then be used as a base image for any other myqlm application running in Jarvice
+This image can then be used as a base image for any other myqlm application running in JARVICE.
 
 References:
 
+* [RockyLinux docker image](https://hub.docker.com/_/rockylinux?tab=reviews)
 * [Jarvice](https://github.com/nimbix)
 * [MyQLM](https://github.com/myqlm)
 
 ## How to use
 
-Build and push your Jarvice image
+Build and push your JARVICE image
 
 ```
 docker build -t rockylinux-nimbix-desktop -f ./Dockerfile --build-arg BASE_IMAgE=docker.io/rockylinux:latest
@@ -29,4 +30,4 @@ docker tag myapp <myregistry>/myapp:latest
 docker push  <myregistry>/myapp:latest
 ```
 
-Add the app to JARVICE XE 'push2compute' application
+Add the app to JARVICE 'push2compute' application
