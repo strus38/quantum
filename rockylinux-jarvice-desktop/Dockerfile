@@ -4,5 +4,6 @@ FROM ${BASE_IMAGE:-docker.io/rockylinux:latest}
 USER root
 RUN rm -rf /data
 
-ADD ../qiskit-myqlm-1/image-common-master /tmp/image-common-master
-RUN /tmp/image-common-master/install-nimbix.sh --setup-nimbix-desktop --skip-mpi-pkg
+RUN dnf install -y ca-certificates && \
+    curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/jarvice-desktop/master/install-nimbix.sh | bash
+#RUN /tmp/image-common-master/install-nimbix.sh --setup-nimbix-desktop --skip-mpi-pkg

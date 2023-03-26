@@ -8,39 +8,33 @@ References:
 * [MyQLM](https://github.com/myqlm)
 * [qiskit](https://qiskit.org/)
 
-## qiskit-myqlm-1
+## Jarvice desktop container
 
-An image generator based on qiskit and myqlm
-
-![qiskit-myqlm-1](images/qiskit-myqlm-1.png?raw=true "qiskit-myqlm-1")
+Basic RockyLinux based image containing Jarvice desktop add-on.
 
 ```
-# Make sure to get qiskit, myqlm, myqlm-interop, tk ...
-$ cd qiskit-myqlm-1
-$ python3 ./qiskit-myqlm-1.py
-
+cd rockylinux-jarvice-desktop
+podman build -t rockylinux-nimbix-desktop -f ./Dockerfile --build-arg BASE_IMAGE=rockylinux:8.7
+podman tag localhost/rockylinux-nimbix-desktop:latest 10.1.0.100:5000/jarvice/rockylinux-nimbix-desktop:latest
+podman push 10.1.0.100:5000/jarvice/rockylinux-nimbix-desktop:latest
 ```
 
-You can also use the Dockerfile provided:
+## myqlm
+
+An image generator based on myqlm
+
+![myqlm](images/myqlm.png?raw=true "myqlm")
 
 ```
-$ cd qiskit-myqlm-1
-$ docker build -t qiskit-myqlm-1:latest -f ./Dockerfile.qiskit-myqlm-1
+cd myqlm
+podman build -t myqlmapp:latest -f ./Dockerfile --build-arg BASE_IMAGE=10.1.0.100:5000/jarvice/rockylinux-nimbix-desktop:latest
+podman tag localhost/myqlmapp:latest 10.1.0.100:5000/jarvice/root.myqlm.app:latest
+podman push 10.1.0.100:5000/jarvice/root.myqlm.app:latest
 ```
+## Jarvice
 
-You can also use it in JARVICE:
+* Connect to the UI, add the new container `10.1.0.100:5000/jarvice/root.myqlm.app:latest` to the Push2Compute app.
+* Launch the application, enjoy!
+![myqlm](images/jarvice.png?raw=true "myqlm")
 
-```
-$ cd qiskit-myqlm-1
-$ podman build -t qiskit-myqlm-1:jarvice -f ./Dockerfile.jarvice
-...tag...
-...push...
 
-# then add it as a custom app
-```
-
-![qiskit-myqlm-1 with JARVICE](images/jarvice.JPG?raw=true "Jarvice")
-
-## rockylinux-jarvice-desktop
-
-Build a generic base container for a nimbix-desktop app using Rockylinux as a base image.

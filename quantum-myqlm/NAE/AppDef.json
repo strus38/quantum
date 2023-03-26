@@ -1,0 +1,147 @@
+{
+    "appdefversion": 2,
+    "author": "Atos",
+    "classifications": [
+        "Quantum"
+    ],
+    "commands": {
+        "myqlm_demo": {
+            "description": "Start myqlm application demo.",
+            "interactive": true,
+            "name": "JARVICE Quantum myqlm Demo",
+            "parameters": {
+                "-APIKEY": {
+                    "description": "APIKEY",
+                    "name": "-APIKEY",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%APIKEY%"
+                },
+                "-APIURL": {
+                    "description": "APIURL",
+                    "name": "-APIURL",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%APIURL%"
+                },
+                "-APIUSER": {
+                    "description": "APIUSER",
+                    "name": "-APIUSER",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%APIUSER%"
+                },
+                "-DOCKER_CREDS": {
+                    "description": "Docker credentials to pull container images (user:password)",
+                    "name": "-DOCKER_CREDS",
+                    "positional": false,
+                    "required": false,
+                    "type": "STR"
+                },
+                "-MACHINE": {
+                    "description": "MACHINE",
+                    "name": "-MACHINE",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%MACHINETYPE%"
+                },
+                "-VAULT": {
+                    "description": "VAULT",
+                    "name": "-VAULT",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%VNAME%"
+                },
+                "command": {
+                    "name": "command",
+                    "positional": true,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "python3 /data/myqlm.py"
+                }
+            },
+            "path": "/usr/local/bin/nimbix_desktop",
+            "publicip": true
+        },
+        "myqlm_ui": {
+            "description": "Start a web UI to run any python myqlm application",
+            "name": "JARVICE myqlm UI",
+            "interactive": true,
+            "parameters": {
+                "-APIKEY": {
+                    "description": "APIKEY",
+                    "name": "-APIKEY",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%APIKEY%"
+                },
+                "-APIURL": {
+                    "description": "APIURL",
+                    "name": "-APIURL",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%APIURL%"
+                },
+                "-APIUSER": {
+                    "description": "APIUSER",
+                    "name": "-APIUSER",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%APIUSER%"
+                },
+                "-DOCKER_CREDS": {
+                    "description": "Docker credentials to pull container images (user:password)",
+                    "name": "-DOCKER_CREDS",
+                    "positional": false,
+                    "required": false,
+                    "type": "STR"
+                },
+                "-VAULT": {
+                    "description": "VAULT",
+                    "name": "-VAULT",
+                    "positional": false,
+                    "required": true,
+                    "type": "CONST",
+                    "value": "%VNAME%"
+                },
+                "command": {
+                    "description": "Command to run",
+                    "name": "Command",
+                    "positional": true,
+                    "required": true,
+                    "type": "STR"
+                }
+            },
+            "path": "/usr/local/bin/nimbix_desktop",
+            "publicip": true
+        }
+    },
+    "description": "Myqlm environment preconfigured with JARVICE support",
+    "image": {
+        "data": "<base64 image data not shown>",
+        "type": ""
+    },
+    "licensed": false,
+    "machines": [
+        "n0",
+        "n1",
+        "n3",
+        "slurm1",
+        ""
+    ],
+    "name": "Myqlm UI",
+    "vault-types": [
+        "FILE",
+        "BLOCK",
+        "BLOCK_ARRAY",
+        "OBJECT"
+    ]
+}
