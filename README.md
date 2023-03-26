@@ -35,6 +35,6 @@ podman push 10.1.0.100:5000/jarvice/root.myqlm.app:latest
 
 * Connect to the UI, add the new container `10.1.0.100:5000/jarvice/root.myqlm.app:latest` to the Push2Compute app.
 * Launch the application, enjoy!
-![myqlm](images/jarvice.png?raw=true "myqlm")
+![myqlm](images/jarvice.JPG?raw=true "myqlm")
 
 
